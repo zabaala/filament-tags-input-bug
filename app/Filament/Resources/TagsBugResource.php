@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TagsBugResource\Pages;
 use App\Models\TagsBug;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -27,6 +28,10 @@ class TagsBugResource extends Resource
                     Toggle::make('disable_tags_toggle'),
                     TagsInput::make('tags')
                         ->default(['a', 'b', 'c'])
+                        ->disabled(static fn (Get $get) => $get('disable_tags_toggle')),
+                    Select::make('select')
+                        ->default(['a', 'b', 'c'])
+                        ->multiple()
                         ->disabled(static fn (Get $get) => $get('disable_tags_toggle')),
                 ]),
             ]);
